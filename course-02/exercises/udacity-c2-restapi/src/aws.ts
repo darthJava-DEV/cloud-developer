@@ -3,8 +3,10 @@ import { config } from './config/config';
 
 const c = config.dev;
 
-//Configure AWS
-var credentials = new AWS.SharedIniFileCredentials({ profile: 'default' });
+// Configure AWS
+const credentials = new AWS.SharedIniFileCredentials({
+    profile: c.aws_profile,
+});
 AWS.config.credentials = credentials;
 
 export const s3 = new AWS.S3({
@@ -13,7 +15,7 @@ export const s3 = new AWS.S3({
     params: { Bucket: c.aws_media_bucket },
 });
 
-/* getGetSignedUrl generates an aws signed url to retreive an item
+/* getGetSignedUrl generates an aws signed url to retrieve an item
  * @Params
  *    key: string - the filename to be put into the s3 bucket
  * @Returns:

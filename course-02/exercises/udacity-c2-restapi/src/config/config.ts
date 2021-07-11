@@ -1,19 +1,21 @@
+require('dotenv').config();
+
 export const config = {
     dev: {
-        username: 'almirudagramdev',
-        password: 'almirudagramdev',
-        database: 'almirudagramdev',
-        host: 'almirudagramdev.cqqtpx3kvsks.us-east-1.rds.amazonaws.com',
+        username: process.env.POSTGRES_USERNAME,
+        password: process.env.POSTGRES_PASSWORD,
+        database: process.env.POSTGRES_DATABASE,
+        host: process.env.POSTGRES_HOST,
         dialect: 'postgres',
-        aws_region: 'us-east-1',
-        aws_profile: 'default',
-        aws_media_bucket: 'almir-udagram-dev',
+        aws_region: process.env.AWS_REGION,
+        aws_profile: process.env.AWS_PROFILE,
+        aws_media_bucket: process.env.aws_media_bucket,
     },
     prod: {
-        username: 'almirudagramdev',
-        password: 'almirudagramdev',
-        database: 'almirudagramdev',
-        host: 'almirudagramdev.cqqtpx3kvsks.us-east-1.rds.amazonaws.com',
+        username: '',
+        password: '',
+        database: '',
+        host: '',
         dialect: 'postgres',
     },
 };
