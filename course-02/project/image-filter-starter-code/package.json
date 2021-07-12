@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "rimraf www/ || true",
     "build": "npm run clean && tsc && cp package.json www/package.json && mkdir www/tmp/ && cd www && zip -r Archive.zip . && cd ..",
-    "dev": "ts-node-dev ./src/server.ts"
+    "dev": "ts-node-dev ./src/server.ts",
+    "prettier": "prettier --write \"src/**/*.ts\" \"src/*.ts\""
   },
   "repository": {
     "type": "git",
@@ -30,6 +31,13 @@
   "dependencies": {
     "express": "^4.17.1",
     "jimp": "^0.16.1",
+    "prettier": "^2.3.2",
     "rimraf": "^3.0.2"
+  },
+  "prettier": {
+    "trailingComma": "es5",
+    "tabWidth": 4,
+    "semi": true,
+    "singleQuote": true
   }
 }
