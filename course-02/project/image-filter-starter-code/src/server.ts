@@ -1,6 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import { filterImageFromURL, deleteLocalFiles } from './util/util';
+import validator from 'validator';
+import { deleteLocalFiles, filterImageFromURL } from './util/util';
 
 (async () => {
     // Init the Express application
@@ -27,6 +28,27 @@ import { filterImageFromURL, deleteLocalFiles } from './util/util';
     //   the filtered image file [!!TIP res.sendFile(filteredpath); might be useful]
 
     /**************************************************************************** */
+    app.get('/filterimage', async (req, res) => {
+        const { image_url } = req.query;
+
+        if (!image_url) {
+            res.status(400).send('image_url not provided or is malformed!');
+        }
+
+        if (!validator.isURL(image_url)) {
+            res.status(400).send('image_url is malformed!');
+        }
+
+        filterImageFromURL(image_url)
+            .then((result) => {
+                res.sendFile(result, (error) => deleteLocalFiles([result]));
+            })
+            .catch(() => {
+                res.status(500).send(
+                    'Internal server error, failed to filter image!'
+                );
+            });
+    });
 
     // ! END @TODO1
 
