@@ -2,6 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import validator from 'validator';
 import { deleteLocalFiles, filterImageFromURL } from './util/util';
+import { requireAuth } from './auth';
 
 (async () => {
     // Init the Express application
@@ -28,7 +29,7 @@ import { deleteLocalFiles, filterImageFromURL } from './util/util';
     //   the filtered image file [!!TIP res.sendFile(filteredpath); might be useful]
 
     /**************************************************************************** */
-    app.get('/filterimage', async (req, res) => {
+    app.get('/filterimage', requireAuth, async (req, res) => {
         const { image_url } = req.query;
 
         if (!image_url) {
